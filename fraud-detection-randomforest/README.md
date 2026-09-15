@@ -1,6 +1,7 @@
 # Fraudulent Detection in Banking System using Random Forest Classifier
 
-Final-year BE Computer Engineering project based on the research paper **JETIR2405086**: *Fraudulent Detection in Banking System using Random Forest Classifier Algorithm*.
+Machine Learning project :
+ *Fraudulent Detection in Banking System using Random Forest Classifier Algorithm*.
 
 The system trains a Random Forest on the **BankSim** synthetic bank-payment dataset and serves a banking-style Flask console that scores live payments, batch CSVs and simulated transactions.
 
@@ -147,4 +148,3 @@ Training also saves report figures in `outputs/` (confusion matrix, ROC, feature
 
 ## Academic note
 
-This is an educational implementation of JETIR2405086 for BE students. BankSim is synthetic. Do not deploy against real customer data without a bank’s security, privacy and model-risk process.
