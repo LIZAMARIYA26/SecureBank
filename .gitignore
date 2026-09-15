@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+.ipynb_checkpoints/
+outputs/prediction_history.json
+outputs/batch_predictions.csv
+.DS_Store
+uploads/
+agent-tools/

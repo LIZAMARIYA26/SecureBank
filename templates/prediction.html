@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% block title %}Live Prediction · SecureBank AI{% endblock %}
+{% block heading %}Live Fraud Prediction{% endblock %}
+
+{% block content %}
+<div class="split">
+  <section class="card">
+    <div class="section-head">
+      <h3>Transaction details</h3>
+      <p>All fields are validated before the Random Forest scores the payment.</p>
+    </div>
+    <form class="form-grid" method="post" action="{{ url_for('predict') }}" data-loading data-validate>
+      {% include "_form_fields.html" %}
+      <div class="form-actions">
+        <button class="primary-btn" type="submit">Predict fraud</button>
+        <a class="ghost-btn" href="{{ url_for('generate') }}">Generate random transaction</a>
+      </div>
+    </form>
+  </section>
+
+  <section>
+    {% if result %}
+      <article class="verdict card {% if result.is_fraud %}fraud{% else %}genuine{% endif %}">
+        <p class="eyebrow">{% if generated %}Simulated payment{% else %}Model decision{% endif %}</p>
+        <h2>{{ result.label }} transaction</h2>
+        <p class="meter-label">Fraud probability</p>
+        <div class="meter" aria-valuenow="{{ result.probability }}" aria-valuemin="0" aria-valuemax="100">
+          <span style="width: {{ result.probability }}%"></span>
+        </div>
+        <p class="big-pct">{{ "%.2f"|format(result.probability) }}%</p>
+        <p>Model confidence: <strong>{{ "%.2f"|format(result.confidence) }}%</strong></p>
+        <p class="explain">{{ result.explanation }}</p>
+        <p class="muted">Scored at {{ result.timestamp }}</p>
+      </article>
+    {% else %}
+      <article class="card">
+        <h3>Waiting for a payment</h3>
+        <p>Submit the form or generate a random transaction. Fraud shows a red card; genuine shows green.</p>
+      </article>
+    {% endif %}
+
+    <article class="card">
+      <div class="section-head">
+        <h3>Batch CSV upload</h3>
+        <p>Columns can include amount, category, gender, age, hour, tx_frequency, payment_mode, device_type, location, spending_category, is_weekend.</p>
+      </div>
+      <form method="post" action="{{ url_for('upload') }}" enctype="multipart/form-data" data-loading>
+        <input type="file" name="file" accept=".csv" required />
+        <div class="form-actions">
+          <button class="primary-btn" type="submit">Score CSV</button>
+          <a class="ghost-btn" href="{{ url_for('download') }}">Download last results</a>
+        </div>
+      </form>
+      {% if batch_preview %}
+        <p class="muted">{{ batch_count }} rows scored · {{ batch_fraud }} flagged as fraud</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Amount</th>
+                <th>Category</th>
+                <th>Decision</th>
+                <th>Probability %</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for row in batch_preview %}
+                <tr>
+                  <td>{{ "%.2f"|format(row.amount) }}</td>
+                  <td>{{ row.category }}</td>
+                  <td>{{ row.label }}</td>
+                  <td>{{ row.fraud_probability }}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      {% endif %}
+    </article>
+  </section>
+</div>
+{% endblock %}

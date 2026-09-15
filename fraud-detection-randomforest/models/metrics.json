@@ -1,0 +1,160 @@
+{
+  "overview": {
+    "rows": 594643,
+    "columns": 10,
+    "column_names": [
+      "step",
+      "customer",
+      "age",
+      "gender",
+      "zipcodeOri",
+      "merchant",
+      "zipMerchant",
+      "category",
+      "amount",
+      "fraud"
+    ],
+    "dtypes": {
+      "step": "int64",
+      "customer": "object",
+      "age": "object",
+      "gender": "object",
+      "zipcodeOri": "int64",
+      "merchant": "object",
+      "zipMerchant": "int64",
+      "category": "object",
+      "amount": "float64",
+      "fraud": "int64"
+    },
+    "missing_values": {
+      "step": 0,
+      "customer": 0,
+      "age": 0,
+      "gender": 0,
+      "zipcodeOri": 0,
+      "merchant": 0,
+      "zipMerchant": 0,
+      "category": 0,
+      "amount": 0,
+      "fraud": 0
+    },
+    "duplicate_rows": 0,
+    "fraud_count": 7200,
+    "genuine_count": 587443
+  },
+  "best_params": {
+    "max_depth": 18,
+    "min_samples_leaf": 1,
+    "min_samples_split": 5,
+    "n_estimators": 140
+  },
+  "before_tuning": {
+    "model": "Random Forest (before)",
+    "accuracy": 0.9827956989247312,
+    "precision": 0.9353982300884955,
+    "recall": 0.9787037037037037,
+    "f1": 0.9565610859728507,
+    "roc_auc": 0.9980285751028807
+  },
+  "after_tuning": {
+    "model": "Random Forest",
+    "accuracy": 0.9828853046594982,
+    "precision": 0.9389210878288007,
+    "recall": 0.975,
+    "f1": 0.9566204860322507,
+    "roc_auc": 0.9982708333333333
+  },
+  "feature_ranking": [
+    {
+      "feature": "merchant_risk_score",
+      "importance": 0.31403895805285204
+    },
+    {
+      "feature": "category_risk_score",
+      "importance": 0.22220982848657111
+    },
+    {
+      "feature": "tx_velocity",
+      "importance": 0.1401144922504897
+    },
+    {
+      "feature": "amount",
+      "importance": 0.10685908647368045
+    },
+    {
+      "feature": "avg_tx_amount",
+      "importance": 0.077889304429398
+    },
+    {
+      "feature": "spending_category",
+      "importance": 0.04803677441851158
+    },
+    {
+      "feature": "category",
+      "importance": 0.03927600804752286
+    },
+    {
+      "feature": "amount_to_avg_ratio",
+      "importance": 0.020464605675268532
+    },
+    {
+      "feature": "device_type",
+      "importance": 0.013837949225142742
+    },
+    {
+      "feature": "tx_frequency",
+      "importance": 0.007502527022850435
+    },
+    {
+      "feature": "hour_of_tx",
+      "importance": 0.0030275412555842082
+    },
+    {
+      "feature": "payment_mode",
+      "importance": 0.0019605068019920204
+    },
+    {
+      "feature": "location",
+      "importance": 0.0017627634979093922
+    },
+    {
+      "feature": "age",
+      "importance": 0.001747667096407606
+    },
+    {
+      "feature": "gender",
+      "importance": 0.0006948399492757942
+    },
+    {
+      "feature": "is_weekend",
+      "importance": 0.0005771473165436311
+    }
+  ],
+  "classification_report": {
+    "Genuine": {
+      "precision": 0.9939441516205002,
+      "recall": 0.9847777777777778,
+      "f1-score": 0.9893397332142658,
+      "support": 9000.0
+    },
+    "Fraud": {
+      "precision": 0.9389210878288007,
+      "recall": 0.975,
+      "f1-score": 0.9566204860322507,
+      "support": 2160.0
+    },
+    "accuracy": 0.9828853046594982,
+    "macro avg": {
+      "precision": 0.9664326197246504,
+      "recall": 0.9798888888888888,
+      "f1-score": 0.9729801096232582,
+      "support": 11160.0
+    },
+    "weighted avg": {
+      "precision": 0.9832945263704939,
+      "recall": 0.9828853046594982,
+      "f1-score": 0.983006975695166,
+      "support": 11160.0
+    }
+  }
+}

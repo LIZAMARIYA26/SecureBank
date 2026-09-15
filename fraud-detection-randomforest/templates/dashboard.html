@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block title %}Dashboard · SecureBank AI{% endblock %}
+{% block heading %}Operations Dashboard{% endblock %}
+
+{% block content %}
+<section class="grid-4">
+  <article class="stat-card">
+    <span>Total scored</span>
+    <strong>{{ stats.total }}</strong>
+  </article>
+  <article class="stat-card danger">
+    <span>Fraud</span>
+    <strong>{{ stats.fraud }}</strong>
+  </article>
+  <article class="stat-card ok">
+    <span>Genuine</span>
+    <strong>{{ stats.genuine }}</strong>
+  </article>
+  <article class="stat-card">
+    <span>Fraud share</span>
+    <strong>{{ stats.fraud_pct }}%</strong>
+  </article>
+</section>
+
+<section class="card">
+  <div class="section-head">
+    <h3>Recent predictions</h3>
+    <p>Last payments scored in this application (stored locally).</p>
+  </div>
+  {% if stats.history %}
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Time</th>
+            <th>Amount</th>
+            <th>Category</th>
+            <th>Decision</th>
+            <th>Probability</th>
+            <th>Confidence</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for row in stats.history %}
+            <tr>
+              <td>{{ row.timestamp }}</td>
+              <td>{{ row.inputs.amount }}</td>
+              <td>{{ row.inputs.category }}</td>
+              <td><span class="tag {% if row.is_fraud %}bad{% else %}good{% endif %}">{{ row.label }}</span></td>
+              <td>{{ "%.2f"|format(row.probability) }}%</td>
+              <td>{{ "%.2f"|format(row.confidence) }}%</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <div class="empty">No predictions yet. Score a payment to populate this table.</div>
+  {% endif %}
+</section>
+
+{% endblock %}

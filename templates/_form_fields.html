@@ -1,0 +1,71 @@
+<div class="field">
+  <label for="age">Customer age</label>
+  <input id="age" name="age" type="number" min="16" max="90" value="{{ result.inputs.age if result else 34 }}" required />
+</div>
+<div class="field">
+  <label for="gender">Gender</label>
+  <select id="gender" name="gender" required>
+    {% for g in choices.genders %}
+      <option value="{{ g }}" {% if result and result.inputs.gender == g %}selected{% endif %}>{{ g }}</option>
+    {% endfor %}
+  </select>
+</div>
+<div class="field">
+  <label for="amount">Transaction amount</label>
+  <input id="amount" name="amount" type="number" min="0.01" step="0.01" value="{{ result.inputs.amount if result else 42.50 }}" required />
+</div>
+<div class="field">
+  <label for="category">Merchant category</label>
+  <select id="category" name="category" required>
+    {% for c in choices.categories %}
+      <option value="{{ c }}" {% if result and result.inputs.category == c %}selected{% endif %}>{{ c }}</option>
+    {% endfor %}
+  </select>
+</div>
+<div class="field">
+  <label for="payment_mode">Payment mode</label>
+  <select id="payment_mode" name="payment_mode">
+    {% for p in choices.payment_modes %}
+      <option value="{{ p }}" {% if result and result.inputs.payment_mode == p %}selected{% endif %}>{{ p }}</option>
+    {% endfor %}
+  </select>
+</div>
+<div class="field">
+  <label for="hour">Hour (0–23)</label>
+  <input id="hour" name="hour" type="number" min="0" max="23" value="{{ result.inputs.hour if result else 14 }}" required />
+</div>
+<div class="field">
+  <label for="tx_frequency">Transaction frequency</label>
+  <input id="tx_frequency" name="tx_frequency" type="number" min="1" max="500" value="{{ result.inputs.tx_frequency if result else 48 }}" required />
+</div>
+<div class="field">
+  <label for="device_type">Device type</label>
+  <select id="device_type" name="device_type">
+    {% for d in choices.device_types %}
+      <option value="{{ d }}" {% if result and result.inputs.device_type == d %}selected{% endif %}>{{ d }}</option>
+    {% endfor %}
+  </select>
+</div>
+<div class="field">
+  <label for="location">Location</label>
+  <select id="location" name="location">
+    {% for loc in choices.locations %}
+      <option value="{{ loc }}" {% if result and result.inputs.location == loc %}selected{% endif %}>{{ loc }}</option>
+    {% endfor %}
+  </select>
+</div>
+<div class="field">
+  <label for="spending_category">Customer spending category</label>
+  <select id="spending_category" name="spending_category">
+    {% for s in choices.spending_categories %}
+      <option value="{{ s }}" {% if result and result.inputs.spending_category == s %}selected{% endif %}>{{ s }}</option>
+    {% endfor %}
+  </select>
+</div>
+<div class="field">
+  <label for="is_weekend">Weekend transaction</label>
+  <select id="is_weekend" name="is_weekend">
+    <option value="0" {% if result and result.inputs.is_weekend == '0' %}selected{% endif %}>Weekday</option>
+    <option value="1" {% if result and result.inputs.is_weekend == '1' %}selected{% endif %}>Weekend</option>
+  </select>
+</div>

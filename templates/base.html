@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}SecureBank AI{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="{{ url_for('index') }}">
+        <img src="{{ url_for('static', filename='images/logo.svg') }}" alt="SecureBank AI logo" />
+        <div>
+          <strong>SecureBank AI</strong>
+          <span>Fraud Defence</span>
+        </div>
+      </a>
+      <nav>
+        <a href="{{ url_for('index') }}" class="{% if request.path == '/' %}active{% endif %}">Home</a>
+        <a href="{{ url_for('predict') }}" class="{% if request.path == '/predict' %}active{% endif %}">Live Predict</a>
+        <a href="{{ url_for('dashboard') }}" class="{% if request.path == '/dashboard' %}active{% endif %}">Dashboard</a>
+        <a href="{{ url_for('generate') }}">Simulate Transaction</a>
+      </nav>
+      <div class="sidebar-foot">
+        <p class="pill">{% if model_ready %}Model online{% else %}Train model first{% endif %}</p>
+        <p class="muted">Random Forest · BankSim</p>
+      </div>
+    </aside>
+
+    <div class="main">
+      <header class="navbar">
+        <div>
+          <p class="eyebrow">Banking Fraud Detection System</p>
+          <h1>{% block heading %}SecureBank AI{% endblock %}</h1>
+        </div>
+        <div class="nav-actions">
+          <button type="button" id="themeToggle" class="ghost-btn" aria-label="Toggle dark mode">Dark mode</button>
+          <a class="primary-btn" href="{{ url_for('generate') }}">Generate random txn</a>
+        </div>
+      </header>
+
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          <div class="alerts">
+            {% for category, message in messages %}
+              <div class="alert {{ category }}">{{ message }}</div>
+            {% endfor %}
+          </div>
+        {% endif %}
+      {% endwith %}
+
+      <main class="content">
+        {% block content %}{% endblock %}
+      </main>
+
+      <footer class="footer">
+        <p>SecureBank AI · Final Year Project based on JETIR2405086 · Random Forest Classifier on BankSim</p>
+        <p>&copy; {{ year }} BE Computer Engineering · Academic use</p>
+      </footer>
+    </div>
+  </div>
+
+  <div id="spinner" class="spinner-overlay hidden" role="status" aria-live="polite">
+    <div class="spinner"></div>
+    <p>Scoring transaction…</p>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

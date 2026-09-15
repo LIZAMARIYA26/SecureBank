@@ -1,0 +1,79 @@
+{% set form_data = result.inputs if result else last_form %}
+<div class="field">
+  <label for="age">Customer age</label>
+  <input id="age" name="age" type="number" min="16" max="90" value="{{ form_data.age if form_data and form_data.age is defined else '' }}" required />
+</div>
+<div class="field">
+  <label for="gender">Gender</label>
+  <select id="gender" name="gender" required>
+    <option value="" {% if not form_data or not form_data.gender %}selected{% endif %}>Select gender</option>
+    {% for g in choices.genders %}
+      <option value="{{ g }}" {% if form_data and form_data.gender == g %}selected{% endif %}>{{ g }}</option>
+    {% endfor %}
+  </select>
+</div>
+<div class="field">
+  <label for="amount">Transaction amount</label>
+  <input id="amount" name="amount" type="number" min="0.01" step="0.01" value="{{ form_data.amount if form_data and form_data.amount is defined else '' }}" required />
+</div>
+<div class="field">
+  <label for="category">Merchant category</label>
+  <select id="category" name="category" required>
+    <option value="" {% if not form_data or not form_data.category %}selected{% endif %}>Select category</option>
+    {% for c in choices.categories %}
+      <option value="{{ c }}" {% if form_data and form_data.category == c %}selected{% endif %}>{{ c }}</option>
+    {% endfor %}
+  </select>
+</div>
+<div class="field">
+  <label for="payment_mode">Payment mode</label>
+  <select id="payment_mode" name="payment_mode">
+    <option value="" {% if not form_data or not form_data.payment_mode %}selected{% endif %}>Select payment mode</option>
+    {% for p in choices.payment_modes %}
+      <option value="{{ p }}" {% if form_data and form_data.payment_mode == p %}selected{% endif %}>{{ p }}</option>
+    {% endfor %}
+  </select>
+</div>
+<div class="field">
+  <label for="hour">Hour (0–23)</label>
+  <input id="hour" name="hour" type="number" min="0" max="23" value="{{ form_data.hour if form_data and form_data.hour is defined else '' }}" required />
+</div>
+<div class="field">
+  <label for="tx_frequency">Transaction frequency</label>
+  <input id="tx_frequency" name="tx_frequency" type="number" min="1" max="500" value="{{ form_data.tx_frequency if form_data and form_data.tx_frequency is defined else '' }}" required />
+</div>
+<div class="field">
+  <label for="device_type">Device type</label>
+  <select id="device_type" name="device_type">
+    <option value="" {% if not form_data or not form_data.device_type %}selected{% endif %}>Select device</option>
+    {% for d in choices.device_types %}
+      <option value="{{ d }}" {% if form_data and form_data.device_type == d %}selected{% endif %}>{{ d }}</option>
+    {% endfor %}
+  </select>
+</div>
+<div class="field">
+  <label for="location">Location</label>
+  <select id="location" name="location">
+    <option value="" {% if not form_data or not form_data.location %}selected{% endif %}>Select location</option>
+    {% for loc in choices.locations %}
+      <option value="{{ loc }}" {% if form_data and form_data.location == loc %}selected{% endif %}>{{ loc }}</option>
+    {% endfor %}
+  </select>
+</div>
+<div class="field">
+  <label for="spending_category">Customer spending category</label>
+  <select id="spending_category" name="spending_category">
+    <option value="" {% if not form_data or not form_data.spending_category %}selected{% endif %}>Select spending category</option>
+    {% for s in choices.spending_categories %}
+      <option value="{{ s }}" {% if form_data and form_data.spending_category == s %}selected{% endif %}>{{ s }}</option>
+    {% endfor %}
+  </select>
+</div>
+<div class="field">
+  <label for="is_weekend">Weekend transaction</label>
+  <select id="is_weekend" name="is_weekend">
+    <option value="" {% if not form_data or not form_data.is_weekend %}selected{% endif %}>Select day type</option>
+    <option value="0" {% if form_data and form_data.is_weekend == '0' %}selected{% endif %}>Weekday</option>
+    <option value="1" {% if form_data and form_data.is_weekend == '1' %}selected{% endif %}>Weekend</option>
+  </select>
+</div>

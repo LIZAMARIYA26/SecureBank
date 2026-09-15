@@ -1,0 +1,6 @@
+age,gender,amount,category,payment_mode,hour,tx_frequency,device_type,location,spending_category,is_weekend
+63,M,1450.75,es_travel,Net Banking,23,3,Mobile,Seville,Low,1
+27,F,980.00,es_leisure,Credit Card,2,4,Mobile,Barcelona,Low,1
+45,M,720.50,es_sports,Wallet,1,2,Desktop,Valencia,Low,1
+31,F,1250.00,es_hotel,Credit Card,0,5,Mobile,Madrid,Low,1
+58,M,640.90,es_travel,UPI,22,6,Desktop,Bilbao,Medium,1
