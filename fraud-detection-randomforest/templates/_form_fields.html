@@ -1,7 +1,7 @@
 {% set form_data = result.inputs if result else last_form %}
 <div class="field">
   <label for="age">Customer age</label>
-  <input id="age" name="age" type="number" min="16" max="90" value="{{ form_data.age if form_data and form_data.age is defined else '' }}" required />
+  <input id="age" name="age" type="number" min="16" max="90" value="{{ form_data.age if form_data and form_data.age is defined else '' }}" onwheel="this.blur()" required />
 </div>
 <div class="field">
   <label for="gender">Gender</label>
@@ -14,7 +14,7 @@
 </div>
 <div class="field">
   <label for="amount">Transaction amount</label>
-  <input id="amount" name="amount" type="number" min="0.01" step="0.01" value="{{ form_data.amount if form_data and form_data.amount is defined else '' }}" required />
+  <input id="amount" name="amount" type="number" min="0.01" step="any" value="{{ form_data.amount if form_data and form_data.amount is defined else '' }}" onwheel="this.blur()" required />
 </div>
 <div class="field">
   <label for="category">Merchant category</label>

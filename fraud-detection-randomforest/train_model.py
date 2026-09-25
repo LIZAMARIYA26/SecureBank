@@ -304,6 +304,16 @@ def main() -> None:
         y_p = clf.predict_proba(X_test_s)[:, 1] if hasattr(clf, "predict_proba") else None
         comparison[name] = evaluate(name, y_test, y_hat, y_p)
         print(name, comparison[name])
+
+    # Save a readable model comparison table for reports and spreadsheets.
+    comparison_df = pd.DataFrame.from_dict(comparison, orient="index").reset_index(drop=True)
+    preferred_columns = ["model", "accuracy", "precision", "recall", "f1", "roc_auc"]
+    comparison_df = comparison_df[
+        [column for column in preferred_columns if column in comparison_df.columns]
+    ]
+    comparison_df.to_csv(config.COMPARISON_PATH.with_suffix(".csv"), index=False)
+    print(f"Comparison CSV saved to: {config.COMPARISON_PATH.with_suffix('.csv')}")
+
     plot_model_comparison(comparison)
 
     # ------------------------------------------------------------------

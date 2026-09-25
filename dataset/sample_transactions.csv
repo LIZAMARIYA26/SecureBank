@@ -1,6 +1,0 @@
-age,gender,amount,category,payment_mode,hour,tx_frequency,device_type,location,spending_category,is_weekend
-34,F,18.40,es_transportation,Debit Card,11,90,POS Terminal,Madrid,Medium,0
-41,M,920.00,es_leisure,Credit Card,2,4,Mobile,Barcelona,Low,1
-28,F,55.10,es_health,UPI,16,40,Desktop,Valencia,High,0
-63,M,1450.75,es_travel,Net Banking,23,3,Mobile,Seville,Low,1
-22,F,9.80,es_food,Wallet,13,120,Mobile,Bilbao,Medium,0
